@@ -1,5 +1,11 @@
 # Changelog
 
+## 44.7.0 [#1357](https://github.com/openfisca/openfisca-core/pull/1357)
+
+#### New features
+
+- Manage list parameter in Excel reform
+
 ## 44.6.0
 
 #### Technical changes
