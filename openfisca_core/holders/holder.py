@@ -44,6 +44,8 @@ class Holder:
                 self._on_disk_storable = True
             if self.variable.name in self.simulation.memory_config.variables_to_drop:
                 self._do_not_store = True
+        # Periods whose values were set via set_input (not formula cache).
+        self._user_input_periods: set = set()
 
     def clone(self, population: t.CorePopulation) -> t.Holder:
         """Copy the holder just enough to be able to run a new simulation without modifying the original simulation."""
@@ -79,6 +81,15 @@ class Holder:
         self._memory_storage.delete(period)
         if self._disk_storage:
             self._disk_storage.delete(period)
+        if period is None:
+            self._user_input_periods.clear()
+        else:
+            period = periods.period(period)
+            self._user_input_periods = {
+                known
+                for known in self._user_input_periods
+                if not period.contains(known)
+            }
 
     def get_array(self, period):
         """Get the value of the variable for the given period.
@@ -235,9 +246,16 @@ class Holder:
             return warnings.warn(warning_message, Warning, stacklevel=2)
         if self.variable.value_type in (float, int) and isinstance(array, str):
             array = commons.eval_expression(array)
-        if self.variable.set_input:
-            return self.variable.set_input(self, period, array)
-        return self._set(period, array)
+        # Mark every ``_set`` performed while handling this call as user input
+        # (including period-casting helpers and custom ``variable.set_input``).
+        previous_recording = getattr(self, "_recording_user_input", False)
+        self._recording_user_input = True
+        try:
+            if self.variable.set_input:
+                return self.variable.set_input(self, period, array)
+            return self._set(period, array, as_input=True)
+        finally:
+            self._recording_user_input = previous_recording
 
     def _to_array(self, value):
         if not isinstance(value, numpy.ndarray):
@@ -262,7 +280,7 @@ class Holder:
                 )
         return value
 
-    def _set(self, period, value) -> None:
+    def _set(self, period, value, *, as_input: bool = False) -> None:
         value = self._to_array(value)
         if not self._eternal:
             if period is None:
@@ -306,6 +324,48 @@ class Holder:
             self._disk_storage.put(value, period)
         else:
             self._memory_storage.put(value, period)
+        if as_input or getattr(self, "_recording_user_input", False):
+            self._user_input_periods.add(period)
+
+    def is_input(self, period) -> bool:
+        """Return whether a value for ``period`` was set via :meth:`set_input`.
+
+        Distinguishes explicit user input (including explicit zeros) from values
+        that come from variable defaults or formula cache. Values stored only by
+        :meth:`put_in_cache` are not considered inputs.
+
+        Args:
+            period: Period to inspect (string or :class:`~openfisca_core.periods.Period`).
+
+        Returns:
+            True if at least one matching period was set through :meth:`set_input`.
+
+        """
+        period = periods.period(period)
+        if period in self._user_input_periods:
+            return True
+        # Accept a wider query period when the stored inputs are elementary periods.
+        if period.unit != self.variable.definition_period or period.size > 1:
+            try:
+                subperiods = period.get_subperiods(self.variable.definition_period)
+            except ValueError:
+                return False
+            return any(sub_period in self._user_input_periods for sub_period in subperiods)
+        return False
+
+    def get_value_state(self, period) -> str:
+        """Return ``"explicit"`` if the value was set as input, else ``"default"``.
+
+        ``"default"`` means the value was not supplied via :meth:`set_input` for
+        this period: the engine may still return the variable default or a
+        calculated value, but that is not tagged as user-provided input.
+
+        This is a narrow API for partial-input / screener workflows (see
+        https://github.com/openfisca/openfisca-core/issues/1380). It does not
+        change calculation semantics.
+
+        """
+        return "explicit" if self.is_input(period) else "default"
 
     def put_in_cache(self, value, period) -> None:
         if self._do_not_store:

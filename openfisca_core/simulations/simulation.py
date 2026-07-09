@@ -547,6 +547,20 @@ class Simulation:
             return
         self.get_holder(variable_name).set_input(period, value)
 
+    def is_input(self, variable_name: str, period) -> bool:
+        """Return whether ``variable_name`` was set via :meth:`set_input` for ``period``.
+
+        See :meth:`openfisca_core.holders.Holder.is_input`.
+        """
+        return self.get_holder(variable_name).is_input(period)
+
+    def get_value_state(self, variable_name: str, period) -> str:
+        """Return ``"explicit"`` if set as input, else ``"default"``.
+
+        See :meth:`openfisca_core.holders.Holder.get_value_state`.
+        """
+        return self.get_holder(variable_name).get_value_state(period)
+
     def get_variable_population(self, variable_name: str) -> Population:
         variable: Variable | None
 

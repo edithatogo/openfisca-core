@@ -251,3 +251,69 @@ def test_set_input_float_to_int(single) -> None:
     simulation.person.get_holder("age").set_input(period, age)
     result = simulation.calculate("age", period)
     assert result == numpy.asarray([50])
+
+
+def test_is_input_distinguishes_missing_from_explicit_zero(tax_benefit_system) -> None:
+    """Omitted inputs and explicit zeros calculate the same, but value state differs.
+
+    See https://github.com/openfisca/openfisca-core/issues/1380
+    """
+    omitted = SimulationBuilder().build_from_entities(
+        tax_benefit_system,
+        {
+            "persons": {"person1": {}},
+            "households": {"household1": {"adults": ["person1"]}},
+        },
+    )
+    explicit_zero = SimulationBuilder().build_from_entities(
+        tax_benefit_system,
+        {
+            "persons": {"person1": {"salary": {str(period): 0}}},
+            "households": {"household1": {"adults": ["person1"]}},
+        },
+    )
+
+    # Calculation still collapses missing to the numeric default (zero).
+    tools.assert_near(omitted.calculate("salary", period), [0])
+    tools.assert_near(explicit_zero.calculate("salary", period), [0])
+
+    # Input provenance is now queryable.
+    assert not omitted.is_input("salary", period)
+    assert omitted.get_value_state("salary", period) == "default"
+
+    assert explicit_zero.is_input("salary", period)
+    assert explicit_zero.get_value_state("salary", period) == "explicit"
+    assert explicit_zero.person.get_holder("salary").is_input(period)
+
+
+def test_is_input_false_for_calculated_cache(single) -> None:
+    simulation = single
+    # salary is an input variable; disposable_income is calculated.
+    simulation.person.get_holder("salary").set_input(period, numpy.asarray([2000]))
+    simulation.calculate("disposable_income", period)
+
+    assert simulation.is_input("salary", period)
+    assert not simulation.is_input("disposable_income", period)
+    assert simulation.get_value_state("disposable_income", period) == "default"
+
+
+def test_is_input_with_period_casting_helper(single) -> None:
+    simulation = single
+    salary_holder = simulation.person.get_holder("salary")
+    # salary uses set_input_divide_by_period: yearly input fans out to months.
+    salary_holder.set_input("2017", numpy.asarray([12000]))
+
+    assert salary_holder.is_input(period)  # 2017-12
+    assert salary_holder.is_input("2017")
+    assert simulation.get_value_state("salary", "2017-01") == "explicit"
+
+
+def test_delete_arrays_clears_input_tracking(single) -> None:
+    simulation = single
+    salary_holder = simulation.person.get_holder("salary")
+    salary_holder.set_input(period, numpy.asarray([1000]))
+    assert salary_holder.is_input(period)
+
+    salary_holder.delete_arrays(period)
+    assert not salary_holder.is_input(period)
+    assert salary_holder.get_value_state(period) == "default"
