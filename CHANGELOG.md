@@ -1,6 +1,6 @@
 # Changelog
 
-## 44.8.0
+## 44.8.0 [#1382](https://github.com/openfisca/openfisca-core/pull/1382)
 
 #### New features
 
