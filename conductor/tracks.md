@@ -1,8 +1,9 @@
 # Tracks Registry
 
 ---
-- [~] **Track: YAML converter portability (#3)**
-  *Link: [./tracks/yaml_converter_portability_20260719/index.md](./tracks/yaml_converter_portability_20260719/index.md)*
+- [x] **Track: YAML converter portability (#3)**
+  *Link: [./archive/yaml_converter_portability_20260719/index.md](./archive/yaml_converter_portability_20260719/index.md)*
+  *Issue: [#3](https://github.com/edithatogo/openfisca-core/issues/3); PR: [#16](https://github.com/edithatogo/openfisca-core/pull/16); runs: [29679752316](https://github.com/edithatogo/openfisca-core/actions/runs/29679752316), [29679752412](https://github.com/edithatogo/openfisca-core/actions/runs/29679752412).*
 
 ---
 - [x] **Track: Explicit-input missingness (#2/#4)**

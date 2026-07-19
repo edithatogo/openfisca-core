@@ -24,6 +24,8 @@
 - Add a fail-closed Draft 2020-12 diagnostics schema with valid and invalid
   contract examples for deterministic converters.
 - Archive the completed explicit-input and Conda CI retrospective records.
+- Archive the YAML converter portability governance record with merge and
+  hosted-validation evidence.
 
 ## 44.7.0 [#1357](https://github.com/openfisca/openfisca-core/pull/1357)
 
