@@ -86,8 +86,10 @@ jobs:
 
     - name: Build core package
       run: |
-        conda build .conda/openfisca-core \
+        conda-build .conda/openfisca-core \
           --use-local \
+          --channel conda-forge \
+          --package-format 2 \
           --no-anaconda-upload \
           --output-folder ~/conda-rel \
           --numpy ${{ inputs.numpy }} \

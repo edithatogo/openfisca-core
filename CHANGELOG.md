@@ -10,6 +10,12 @@
   - Tracking is limited to values set via `set_input` (including period-casting helpers); formula cache via `put_in_cache` is not treated as input
   - Calculation semantics are unchanged: omitted inputs still default as before; callers can now inspect whether a value was user-provided (e.g. explicit zero vs never set)
 
+## Unreleased [#9](https://github.com/edithatogo/openfisca-core/issues/9)
+
+#### Technical changes
+
+- Repair the fork's inherited Conda package build and test workflow.
+
 ## 44.7.0 [#1357](https://github.com/openfisca/openfisca-core/pull/1357)
 
 #### New features
