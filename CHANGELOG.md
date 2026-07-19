@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased [#9](https://github.com/edithatogo/openfisca-core/issues/9)
+
+#### Technical changes
+
+- Repair the fork's inherited Conda package build and test workflow.
+
 ## 44.7.0 [#1357](https://github.com/openfisca/openfisca-core/pull/1357)
 
 #### New features
