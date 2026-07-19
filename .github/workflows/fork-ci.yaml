@@ -3,7 +3,13 @@ name: Fork Python 3.11 validation
 on:
   pull_request:
     branches: [master]
+    types: [opened, reopened, synchronize, ready_for_review]
   workflow_dispatch:
+    inputs:
+      reason:
+        description: Reason for this manual validation run
+        required: true
+        type: string
 
 permissions:
   contents: read
