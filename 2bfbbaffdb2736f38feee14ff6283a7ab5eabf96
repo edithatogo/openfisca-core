@@ -1,0 +1,1 @@
+Integration review removed trailing blank lines reported by git diff --check. Focused portability contract: 6 tests passed with pytest and jsonschema under isolated plugin loading.
