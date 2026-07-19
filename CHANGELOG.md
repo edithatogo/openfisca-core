@@ -20,6 +20,10 @@
 - Prevent fork pull requests and merges from invoking upstream PyPI and Conda
   publication jobs while preserving publication behavior in the canonical repo.
 - Archive the publication-boundary governance record with post-merge evidence.
+- Document YAML converter portability and explicit loss boundaries (#3).
+- Add a fail-closed Draft 2020-12 diagnostics schema with valid and invalid
+  contract examples for deterministic converters.
+- Archive the completed explicit-input and Conda CI retrospective records.
 
 ## 44.7.0 [#1357](https://github.com/openfisca/openfisca-core/pull/1357)
 
