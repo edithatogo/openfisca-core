@@ -15,6 +15,8 @@
 #### Technical changes
 
 - Repair the fork's inherited Conda package build and test workflow.
+- Add Conductor governance records for completed fork work, including
+  hash-chained hosted-check evidence and explicit evidence boundaries.
 
 ## 44.7.0 [#1357](https://github.com/openfisca/openfisca-core/pull/1357)
 
