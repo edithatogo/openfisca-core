@@ -66,7 +66,7 @@ jobs:
       if: steps.cache-env.outputs.cache-hit != 'true'
 
     - name: Install dependencies
-      run: mamba install boa rattler-build
+      run: mamba install conda-build rattler-build
       if: steps.cache-env.outputs.cache-hit != 'true'
 
     - name: Update conda & dependencies
@@ -86,7 +86,7 @@ jobs:
 
     - name: Build core package
       run: |
-        conda mambabuild .conda/openfisca-core \
+        conda build .conda/openfisca-core \
           --use-local \
           --no-anaconda-upload \
           --output-folder ~/conda-rel \
