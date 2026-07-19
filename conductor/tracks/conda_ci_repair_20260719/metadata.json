@@ -1,0 +1,29 @@
+{
+  "track_id": "conda_ci_repair_20260719",
+  "type": "bug",
+  "status": "completed",
+  "created_at": "2026-07-19T03:10:33Z",
+  "updated_at": "2026-07-19T03:10:33Z",
+  "description": "Retrospective governance record for the Conda CI repair in issues #9/#10.",
+  "evidence_schema": "1.0",
+  "gates": [
+    {
+      "id": "fork-pr-10-merged",
+      "kind": "merge",
+      "status": "satisfied",
+      "evidence": "https://github.com/edithatogo/openfisca-core/pull/10"
+    },
+    {
+      "id": "fork-publication",
+      "kind": "publication",
+      "status": "not_applicable",
+      "evidence": "Outside the retrospective repair contract; post-merge deploy run 29671349901 failed."
+    },
+    {
+      "id": "independent-validation",
+      "kind": "review",
+      "status": "not_applicable",
+      "evidence": "Not required by the retrospective contract; controlled-fork CI is explicitly not independent evidence."
+    }
+  ]
+}
