@@ -35,7 +35,7 @@ def set_input_dispatch_by_period(holder, period, array) -> None:
     while sub_period.start < after_instant:
         existing_array = holder.get_array(sub_period)
         if existing_array is None:
-            holder._set(sub_period, array)
+            holder._set(sub_period, array, as_input=True)
         else:
             # The array of the current sub-period is reused for the next ones.
             # TODO: refactor or document this behavior
@@ -84,7 +84,7 @@ def set_input_divide_by_period(holder, period, array) -> None:
         sub_period = periods.Period((cached_period_unit, period.start, 1))
         while sub_period.start < after_instant:
             if holder.get_array(sub_period) is None:
-                holder._set(sub_period, divided_array)
+                holder._set(sub_period, divided_array, as_input=True)
             sub_period = sub_period.offset(1)
     elif not (remaining_array == 0).all():
         msg = f"Inconsistent input: variable {holder.variable.name} has already been set for all months contained in period {period}, and value {array} provided for {period} doesn't match the total ({array - remaining_array}). This error may also be thrown if you try to call set_input twice for the same variable and period."

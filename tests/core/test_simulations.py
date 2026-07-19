@@ -1,3 +1,4 @@
+import numpy
 import pytest
 
 from openfisca_country_template.situation_examples import single
@@ -57,6 +58,10 @@ def test_clone(tax_benefit_system) -> None:
     assert salary_holder != salary_holder_clone
     assert salary_holder_clone.simulation == simulation_clone
     assert salary_holder_clone.population == simulation_clone.persons
+
+    salary_holder_clone.set_input("2017-02", numpy.asarray([4000]))
+    assert salary_holder_clone.is_input("2017-02")
+    assert not salary_holder.is_input("2017-02")
 
 
 def test_get_memory_usage(tax_benefit_system) -> None:
