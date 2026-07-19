@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "converter": {"name": "example-adapter", "version": "1.0.0"},
+  "source": {"format": "example-case", "version": "1"},
+  "target": {"openfisca_core": "44.8.0", "country_package": "openfisca-country-template", "country_package_version": "8.0.0"},
+  "outcome": "success_with_warnings",
+  "output_emitted": true,
+  "diagnostics": [{"severity": "warning", "code": "OFC-W-PERIOD-COERCED", "source_path": "/income/0/period", "target_path": "/0/input/persons/person-1/salary/2026-01", "message": "Allocated a source quarter equally across its three calendar months.", "assumption": "equal-month-allocation-v1"}]
+}
