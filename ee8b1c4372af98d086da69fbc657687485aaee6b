@@ -1,0 +1,5 @@
+Issue: https://github.com/edithatogo/openfisca-core/issues/3
+Track: yaml_converter_portability_20260719
+Scope: deterministic YAML mapping classifications, fail-closed diagnostics schema, examples, and focused contract tests.
+Validation: 6 focused tests passed; Black, isort, Flake8, codespell, JSON parsing, evidence ledger, Conductor full validation, and git diff checks passed.
+Boundary: no universal converter or source-specific mapping added; future converter code requires a separately scoped consumer and tests.
