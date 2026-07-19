@@ -1,0 +1,62 @@
+name: Fork Python 3.11 validation
+
+on:
+  pull_request:
+    branches: [master]
+    types: [opened, reopened, synchronize, ready_for_review]
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: Reason for this manual validation run
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fork-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-validation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install project and test fixture package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --editable ".[dev]"
+          python -m pip install --no-deps openfisca-country-template
+
+      - name: Run focused tests
+        run: >-
+          python -m pytest
+          tests/core/test_holders.py
+          tests/core/test_simulations.py::test_clone
+          -q
+
+      - name: Run focused style checks
+        run: |
+          files=(
+            openfisca_core/holders/helpers.py
+            openfisca_core/holders/holder.py
+            openfisca_core/simulations/simulation.py
+            tests/core/test_holders.py
+            tests/core/test_simulations.py
+          )
+          python -m ruff check "${files[@]}"
+          python -m isort --check "${files[@]}"
+          python -m black --check "${files[@]}"
+          python -m flake8 "${files[@]}"
+          codespell CHANGELOG.md "${files[@]}"
