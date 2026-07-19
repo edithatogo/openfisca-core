@@ -2,11 +2,11 @@
 
 ---
 - [x] **Track: Explicit-input missingness (#2/#4)**
-  *Link: [./tracks/explicit_input_missingness_20260719/index.md](./tracks/explicit_input_missingness_20260719/index.md)*
+  *Link: [./archive/explicit_input_missingness_20260719/index.md](./archive/explicit_input_missingness_20260719/index.md)*
 
 ---
 - [x] **Track: Conda CI repair (#9/#10)**
-  *Link: [./tracks/conda_ci_repair_20260719/index.md](./tracks/conda_ci_repair_20260719/index.md)*
+  *Link: [./archive/conda_ci_repair_20260719/index.md](./archive/conda_ci_repair_20260719/index.md)*
 
 ---
 - [x] **Track: Fork publication boundary (#12)**

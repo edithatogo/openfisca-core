@@ -12,3 +12,8 @@
 
 This retrospective records work completed before Conductor adoption; functional
 SHAs are preserved in `evidence.jsonl` rather than represented as new task commits.
+
+> CHECKPOINT (2026-07-19): Retrospective completion audited. Issue #2 is closed,
+> PR #4 merged as `cb677211039ce0d1ad4cb96fa82750dc20ff0e88`, and all 25
+> applicable PR-head checks passed. The failed post-merge publication run remains
+> an explicitly non-applicable controlled-fork boundary. Track archived.
