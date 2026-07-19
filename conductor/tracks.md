@@ -1,6 +1,10 @@
 # Tracks Registry
 
 ---
+- [x] **Track: YAML converter portability (#3)**
+  *Link: [./tracks/yaml_converter_portability_20260719/index.md](./tracks/yaml_converter_portability_20260719/index.md)*
+
+---
 - [x] **Track: Explicit-input missingness (#2/#4)**
   *Link: [./archive/explicit_input_missingness_20260719/index.md](./archive/explicit_input_missingness_20260719/index.md)*
 
