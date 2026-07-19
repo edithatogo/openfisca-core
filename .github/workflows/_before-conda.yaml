@@ -38,7 +38,7 @@ jobs:
           /usr/share/miniconda/envs/openfisca
           ~/.conda/envs/openfisca
           .env.yaml
-        key: conda-env-${{ inputs.os }}-np${{ inputs.numpy }}-py${{ inputs.python }}-${{ hashFiles('setup.py') }}
+        key: conda-env-${{ inputs.os }}-np${{ inputs.numpy }}-py${{ inputs.python }}-${{ hashFiles('setup.py', '.github/workflows/_before-conda.yaml') }}
         restore-keys: conda-env-${{ inputs.os }}-np${{ inputs.numpy }}-py${{ inputs.python }}-
       id: cache-env
 
@@ -46,7 +46,7 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ~/conda_pkgs_dir
-        key: conda-deps-${{ inputs.os }}-np${{ inputs.numpy }}-py${{ inputs.python }}-${{ hashFiles('setup.py') }}
+        key: conda-deps-${{ inputs.os }}-np${{ inputs.numpy }}-py${{ inputs.python }}-${{ hashFiles('setup.py', '.github/workflows/_before-conda.yaml') }}
         restore-keys: conda-deps-${{ inputs.os }}-np${{ inputs.numpy }}-py${{ inputs.python }}-
       id: cache-deps
 
@@ -66,7 +66,7 @@ jobs:
       if: steps.cache-env.outputs.cache-hit != 'true'
 
     - name: Install dependencies
-      run: mamba install boa rattler-build
+      run: mamba install conda-build rattler-build
       if: steps.cache-env.outputs.cache-hit != 'true'
 
     - name: Update conda & dependencies
@@ -86,7 +86,7 @@ jobs:
 
     - name: Build core package
       run: |
-        conda mambabuild .conda/openfisca-core \
+        conda-build .conda/openfisca-core \
           --use-local \
           --no-anaconda-upload \
           --output-folder ~/conda-rel \
