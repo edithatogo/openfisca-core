@@ -88,6 +88,7 @@ jobs:
       run: |
         conda-build .conda/openfisca-core \
           --use-local \
+          --channel conda-forge \
           --no-anaconda-upload \
           --output-folder ~/conda-rel \
           --numpy ${{ inputs.numpy }} \
