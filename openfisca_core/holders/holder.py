@@ -56,6 +56,7 @@ class Holder:
             if key not in ("population", "formula", "simulation"):
                 new_dict[key] = value
 
+        new_dict["_user_input_periods"] = self._user_input_periods.copy()
         new_dict["population"] = population
         new_dict["simulation"] = population.simulation
 
@@ -350,7 +351,9 @@ class Holder:
                 subperiods = period.get_subperiods(self.variable.definition_period)
             except ValueError:
                 return False
-            return any(sub_period in self._user_input_periods for sub_period in subperiods)
+            return any(
+                sub_period in self._user_input_periods for sub_period in subperiods
+            )
         return False
 
     def get_value_state(self, period) -> str:

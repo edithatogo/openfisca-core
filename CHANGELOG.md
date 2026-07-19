@@ -1,10 +1,10 @@
 # Changelog
 
-## 44.8.0 [#1382](https://github.com/openfisca/openfisca-core/pull/1382)
+## 44.8.0 [#2](https://github.com/edithatogo/openfisca-core/issues/2)
 
 #### New features
 
-- Distinguish explicit user input from default / calculated values on holders (#1380)
+- Distinguish explicit user input from default / calculated values on holders (#2)
   - Add `Holder.is_input(period)` and `Holder.get_value_state(period)` (`"explicit"` | `"default"`)
   - Add matching `Simulation.is_input` / `Simulation.get_value_state` helpers
   - Tracking is limited to values set via `set_input` (including period-casting helpers); formula cache via `put_in_cache` is not treated as input
