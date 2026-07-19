@@ -1,0 +1,11 @@
+Track: yaml_converter_portability_20260719
+Closeout commit: 1049b3a8
+Implementation PR: https://github.com/edithatogo/openfisca-core/pull/16
+PR head: ca396e6a0f8df35df1c7dc819843891a1a4a384e
+Merge commit: 4e18a4adc3c1e534e5f1763feefb278a67b14ff9
+Issue: https://github.com/edithatogo/openfisca-core/issues/3 (closed 2026-07-19T08:41:21Z)
+Hosted focused validation: https://github.com/edithatogo/openfisca-core/actions/runs/29679752316 (success)
+Hosted full matrix: https://github.com/edithatogo/openfisca-core/actions/runs/29679752412 (success)
+Local validation: evidence chain passed; Conductor full validation passed with zero errors/warnings; git diff --check passed.
+Local focused pytest limitation: jsonschema is not installed in the worktree interpreter; hosted focused and full checks provide the execution evidence.
+No push performed.
