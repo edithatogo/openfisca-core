@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/edithatogo/openfisca-core/blob/master/docs/yaml-conversion-diagnostics.schema.json",
+  "title": "OpenFisca YAML conversion diagnostics",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "converter", "source", "target", "outcome", "output_emitted", "diagnostics"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "converter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {"name": {"type": "string", "minLength": 1}, "version": {"type": "string", "minLength": 1}}
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["format", "version"],
+      "properties": {"format": {"type": "string", "minLength": 1}, "version": {"type": "string", "minLength": 1}}
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["openfisca_core", "country_package", "country_package_version"],
+      "properties": {
+        "openfisca_core": {"type": "string", "pattern": "^44\\."},
+        "country_package": {"type": "string", "minLength": 1},
+        "country_package_version": {"type": "string", "minLength": 1}
+      }
+    },
+    "outcome": {"enum": ["success", "success_with_warnings", "failure"]},
+    "output_emitted": {"type": "boolean"},
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["severity", "code", "source_path", "message"],
+        "properties": {
+          "severity": {"enum": ["warning", "error"]},
+          "code": {"type": "string", "pattern": "^OFC-[EW]-[A-Z0-9-]+$"},
+          "source_path": {"type": "string", "pattern": "^(/([^~/]|~[01])*)*$"},
+          "target_path": {"type": "string", "pattern": "^(/([^~/]|~[01])*)*$"},
+          "message": {"type": "string", "minLength": 1},
+          "assumption": {"type": "string", "minLength": 1}
+        },
+        "allOf": [
+          {
+            "if": {"properties": {"severity": {"const": "warning"}}, "required": ["severity"]},
+            "then": {
+              "required": ["assumption"],
+              "properties": {"code": {"pattern": "^OFC-W-"}}
+            }
+          },
+          {"if": {"properties": {"severity": {"const": "error"}}}, "then": {"properties": {"code": {"pattern": "^OFC-E-"}}}}
+        ]
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"outcome": {"const": "failure"}}},
+      "then": {
+        "properties": {
+          "output_emitted": {"const": false},
+          "diagnostics": {
+            "contains": {
+              "properties": {"severity": {"const": "error"}},
+              "required": ["severity"]
+            },
+            "minContains": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"outcome": {"const": "success"}}},
+      "then": {
+        "properties": {
+          "output_emitted": {"const": true},
+          "diagnostics": {"maxItems": 0}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"outcome": {"const": "success_with_warnings"}}},
+      "then": {
+        "properties": {
+          "output_emitted": {"const": true},
+          "diagnostics": {
+            "minItems": 1,
+            "items": {
+              "properties": {"severity": {"const": "warning"}},
+              "required": ["severity"]
+            }
+          }
+        }
+      }
+    }
+  ]
+}
