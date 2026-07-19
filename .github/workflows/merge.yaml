@@ -169,7 +169,9 @@ jobs:
   publish-to-pypi:
     runs-on: ubuntu-24.04
     needs: [check-for-functional-changes]
-    if: needs.check-for-functional-changes.outputs.status == 'success'
+    if: >-
+      github.repository == 'openfisca/openfisca-core' &&
+      needs.check-for-functional-changes.outputs.status == 'success'
     env:
       PYPI_USERNAME: __token__
       PYPI_TOKEN: ${{ secrets.PYPI_TOKEN_OPENFISCA_BOT }}
