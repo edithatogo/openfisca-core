@@ -27,4 +27,3 @@ with a maintained contract for deterministic external-fixture adapters.
 - A universal converter, source schema, or country-package ontology.
 - Silent coercion, inferred legal meaning, or runtime AI decisions.
 - Claims of compatibility across unpinned country-package releases.
-

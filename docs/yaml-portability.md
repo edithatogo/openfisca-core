@@ -109,4 +109,3 @@ YAML comments, anchors, aliases, quoting, formatting, and original numeric
 lexemes are presentation details and are not round-trip guarantees. Runtime or
 country-package upgrades require rerunning the equivalence suite; compatibility
 is not assumed across OpenFisca Core major versions or country-package releases.
-
