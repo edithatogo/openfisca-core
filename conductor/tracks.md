@@ -9,5 +9,6 @@
   *Link: [./tracks/conda_ci_repair_20260719/index.md](./tracks/conda_ci_repair_20260719/index.md)*
 
 ---
-- [~] **Track: Fork publication boundary (#12)**
-  *Link: [./tracks/fork_publication_boundary_20260719/index.md](./tracks/fork_publication_boundary_20260719/index.md)*
+- [x] **Track: Fork publication boundary (#12)**
+  *Link: [./archive/fork_publication_boundary_20260719/index.md](./archive/fork_publication_boundary_20260719/index.md)*
+  *Issue: [#12](https://github.com/edithatogo/openfisca-core/issues/12); PR: [#13](https://github.com/edithatogo/openfisca-core/pull/13); run: [29674615420](https://github.com/edithatogo/openfisca-core/actions/runs/29674615420).*
