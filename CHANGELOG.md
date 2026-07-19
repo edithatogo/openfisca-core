@@ -19,6 +19,7 @@
   hash-chained hosted-check evidence and explicit evidence boundaries.
 - Prevent fork pull requests and merges from invoking upstream PyPI and Conda
   publication jobs while preserving publication behavior in the canonical repo.
+- Archive the publication-boundary governance record with post-merge evidence.
 
 ## 44.7.0 [#1357](https://github.com/openfisca/openfisca-core/pull/1357)
 
