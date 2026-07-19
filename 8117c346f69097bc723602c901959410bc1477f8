@@ -1,0 +1,1 @@
+Final review cleanup: removed trailing blank lines; git diff --check clean.
