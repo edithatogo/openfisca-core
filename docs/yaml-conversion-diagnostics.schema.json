@@ -46,7 +46,13 @@
           "assumption": {"type": "string", "minLength": 1}
         },
         "allOf": [
-          {"if": {"properties": {"severity": {"const": "warning"}}}, "then": {"required": ["assumption"]}},
+          {
+            "if": {"properties": {"severity": {"const": "warning"}}, "required": ["severity"]},
+            "then": {
+              "required": ["assumption"],
+              "properties": {"code": {"pattern": "^OFC-W-"}}
+            }
+          },
           {"if": {"properties": {"severity": {"const": "error"}}}, "then": {"properties": {"code": {"pattern": "^OFC-E-"}}}}
         ]
       }
@@ -62,7 +68,8 @@
             "contains": {
               "properties": {"severity": {"const": "error"}},
               "required": ["severity"]
-            }
+            },
+            "minContains": 1
           }
         }
       }
@@ -83,11 +90,9 @@
           "output_emitted": {"const": true},
           "diagnostics": {
             "minItems": 1,
-            "not": {
-              "contains": {
-                "properties": {"severity": {"const": "error"}},
-                "required": ["severity"]
-              }
+            "items": {
+              "properties": {"severity": {"const": "warning"}},
+              "required": ["severity"]
             }
           }
         }

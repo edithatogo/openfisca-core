@@ -71,6 +71,7 @@ dev_requirements = [
     "flake8-rst-docstrings >=0.3.0, <0.4.0",
     "idna >=3.10, <4.0",
     "isort >=5.13.2, <6.0",
+    "jsonschema >=4.23.0, <5.0",
     "mypy >=1.11.2, <2.0",
     "openapi-spec-validator >=0.7.1, <0.8.0",
     "pylint >=3.3.1, <4.0",

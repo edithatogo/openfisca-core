@@ -1,7 +1,7 @@
 # Tracks Registry
 
 ---
-- [x] **Track: YAML converter portability (#3)**
+- [~] **Track: YAML converter portability (#3)**
   *Link: [./tracks/yaml_converter_portability_20260719/index.md](./tracks/yaml_converter_portability_20260719/index.md)*
 
 ---

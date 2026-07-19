@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "converter": {"name": "example", "version": "1.0"},
+  "source": {"format": "example", "version": "1.0"},
+  "target": {"openfisca_core": "44.0.0", "country_package": "example", "country_package_version": "1.0"},
+  "outcome": "success",
+  "output_emitted": true,
+  "diagnostics": [],
+  "unreviewed_output": true
+}

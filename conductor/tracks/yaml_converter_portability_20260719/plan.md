@@ -20,3 +20,9 @@
 - [x] Record the boundary that future converter code requires a separately
   scoped consumer, issue, and tests.
 
+## Phase 4: Hosted closeout
+
+- [ ] Open and review the fork pull request, recording its immutable head and
+  hosted-check evidence.
+- [ ] Merge the pull request and close fork issue #3.
+- [ ] Record the merge commit, satisfy the issue gate, and archive the track.
