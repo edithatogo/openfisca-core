@@ -1,0 +1,25 @@
+{
+  "track_id": "yaml_converter_portability_20260719",
+  "type": "chore",
+  "status": "completed",
+  "created_at": "2026-07-19T08:00:00Z",
+  "updated_at": "2026-07-19T08:41:21Z",
+  "description": "Document deterministic YAML converter portability and loss boundaries for issue #3.",
+  "evidence_schema": "1.0",
+  "gates": [
+    {
+      "id": "fork-issue-3",
+      "kind": "issue",
+      "status": "satisfied",
+      "evidence": "https://github.com/edithatogo/openfisca-core/issues/3"
+    }
+  ],
+  "issue": "https://github.com/edithatogo/openfisca-core/issues/3",
+  "pull_request": "https://github.com/edithatogo/openfisca-core/pull/16",
+  "pull_request_head": "ca396e6a0f8df35df1c7dc819843891a1a4a384e",
+  "merge_commit": "4e18a4adc3c1e534e5f1763feefb278a67b14ff9",
+  "hosted_checks": [
+    "https://github.com/edithatogo/openfisca-core/actions/runs/29679752316",
+    "https://github.com/edithatogo/openfisca-core/actions/runs/29679752412"
+  ]
+}

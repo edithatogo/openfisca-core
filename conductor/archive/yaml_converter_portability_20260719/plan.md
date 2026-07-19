@@ -22,7 +22,14 @@
 
 ## Phase 4: Hosted closeout
 
-- [ ] Open and review the fork pull request, recording its immutable head and
+- [x] Open and review the fork pull request, recording its immutable head and
   hosted-check evidence.
-- [ ] Merge the pull request and close fork issue #3.
-- [ ] Record the merge commit, satisfy the issue gate, and archive the track.
+- [x] Merge the pull request and close fork issue #3.
+- [x] Record the merge commit, satisfy the issue gate, and archive the track.
+
+> CHECKPOINT (2026-07-19): PR #16 passed focused validation and the complete
+> OpenFisca Core pull-request matrix at head
+> `ca396e6a0f8df35df1c7dc819843891a1a4a384e`, then merged as
+> `4e18a4adc3c1e534e5f1763feefb278a67b14ff9`. GitHub closed fork issue #3.
+> The evidence ledger preserves the implementation, immutable PR head, hosted
+> runs, merge, and issue-close records. Track archived.
