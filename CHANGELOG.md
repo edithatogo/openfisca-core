@@ -14,6 +14,7 @@
 
 #### Technical changes
 
+- Add `CITATION.cff` metadata for citing this repository fork.
 - Repair the fork's inherited Conda package build and test workflow.
 - Add Conductor governance records for completed fork work, including
   hash-chained hosted-check evidence and explicit evidence boundaries.
