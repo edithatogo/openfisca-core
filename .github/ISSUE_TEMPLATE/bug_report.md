@@ -1,3 +1,8 @@
+---
+name: Bug report
+about: Report a reproducible issue with OpenFisca Core.
+---
+
 Hi there!
 
 I really enjoy OpenFisca, but I recently encountered an issue.
