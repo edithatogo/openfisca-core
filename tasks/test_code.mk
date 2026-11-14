@@ -11,10 +11,11 @@ extension = $(shell python -c "import pathlib, $(1); print(pathlib.Path($(1).__p
 install: install-deps install-edit install-test
 
 ## Enable regression testing with template repositories.
+# Match the country fixture already qualified by the Conda test recipe.
 install-test:
 	@$(call print_help,$@:)
 	@python -m pip install --no-deps --upgrade --no-binary :all: \
-		openfisca-country-template openfisca-extension-template
+		openfisca-country-template==8.0.0 openfisca-extension-template
 
 ## Run openfisca-core & country/extension template tests.
 test-code: test-core test-country test-extension

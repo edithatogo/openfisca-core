@@ -15,6 +15,7 @@
 #### Technical changes
 
 - Move the existing bug report into GitHub's supported issue template directory, preserving its reproduction and contributor-context prompts.
+- Align pip country fixtures with the validated Conda baseline and Ruff import grouping with the existing isort policy.
 - Repair the fork's inherited Conda package build and test workflow.
 - Add Conductor governance records for completed fork work, including
   hash-chained hosted-check evidence and explicit evidence boundaries.
