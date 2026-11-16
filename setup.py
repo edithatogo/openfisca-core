@@ -10,7 +10,7 @@ Note:
     loop that makes it hard to contribute. We've therefore decided to install
     them via the task manager (`make install-test`)::
 
-        openfisca-country-template = "*"
+        openfisca-country-template = "8.0.0"
         openfisca-extension-template = "*"
 
 """

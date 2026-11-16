@@ -12,3 +12,15 @@ ignore-words-list = [
     "treshold",
 ]
 skip = "./venv"
+
+# Keep Ruff's import checks consistent with the existing setup.cfg isort policy.
+[tool.ruff.lint.isort]
+case-sensitive = true
+combine-as-imports = true
+known-first-party = ["openfisca_core"]
+section-order = ["future", "typing", "types", "standard-library", "third-party", "openfisca", "first-party", "local-folder"]
+
+[tool.ruff.lint.isort.sections]
+typing = ["*collections.abc*", "*typing*", "*typing_extensions*"]
+types = ["*types*"]
+openfisca = ["openfisca_country_template", "openfisca_extension_template"]
