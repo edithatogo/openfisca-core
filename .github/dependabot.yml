@@ -6,3 +6,8 @@ updates:
     interval: monthly
   labels:
   - kind:dependencies
+
+- package-ecosystem: github-actions
+  directory: /
+  schedule:
+    interval: weekly
